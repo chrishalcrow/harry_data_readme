@@ -68,7 +68,7 @@ For example, the VR data for mouse 25, day 25 in stored in
 "data_folder/Cohort12_august2024/vr/M25_D25_2024-11-13_13-59-48_VR1"
 ```
 
-Within each folder is the raw data extracted during the experiment. Depending on the session, this might contain electrphisiology data, behavioural data or both. Find out more in the Datatypes section below.
+Within each folder is the raw data extracted during the experiment. Depending on the session, this might contain electrophysiology data, behavioural data or both. Find out more in the Datatypes section below.
 
 ### Derived data
 
