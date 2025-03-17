@@ -5,7 +5,7 @@ theme: spacelab
 format:
   html:
     toc: true
-    toc-location: left-body
+    toc-location: left
 ---
 
 ## Overview
