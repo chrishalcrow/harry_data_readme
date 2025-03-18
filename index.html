@@ -115,11 +115,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#experimental-overview" id="toc-experimental-overview" class="nav-link" data-scroll-target="#experimental-overview">Experimental overview</a></li>
   <li><a href="#experiment-and-session-types" id="toc-experiment-and-session-types" class="nav-link" data-scroll-target="#experiment-and-session-types">Experiment and session Types</a></li>
   <li><a href="#folder-structure" id="toc-folder-structure" class="nav-link" data-scroll-target="#folder-structure">Folder Structure</a>
   <ul class="collapse">
   <li><a href="#raw-data" id="toc-raw-data" class="nav-link" data-scroll-target="#raw-data">Raw data</a></li>
-  <li><a href="#derived-data" id="toc-derived-data" class="nav-link" data-scroll-target="#derived-data">Derived data</a></li>
   </ul></li>
   <li><a href="#accessing-data" id="toc-accessing-data" class="nav-link" data-scroll-target="#accessing-data">Accessing data</a>
   <ul class="collapse">
@@ -132,6 +132,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#technical-details" id="toc-technical-details" class="nav-link" data-scroll-target="#technical-details">Technical details</a>
   <ul class="collapse">
   <li><a href="#protocols" id="toc-protocols" class="nav-link" data-scroll-target="#protocols">Protocols</a></li>
+  <li><a href="#faq" id="toc-faq" class="nav-link" data-scroll-target="#faq">FAQ</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -165,6 +167,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
 <p>TEST. This experiment is designed to find out stuff about memory.</p>
+</section>
+<section id="experimental-overview" class="level2">
+<h2 class="anchored" data-anchor-id="experimental-overview">Experimental overview</h2>
+<p>We stereotaxically targeted the medial entorhinal cortex of 7 males and 1 female C57BL/6J mice with Neuropixel 2.0 (NP2; 4 shank) probes. Prior to implantation of the NP2 probes, mice were trained in the VR linear track experiment to an expert level in both beaconed and non-beaconed trial variants (see Tennant et al., 2018; 10.1016/j.celrep.2018.01.005).</p>
+<p>Changes to the task from Tennant et al., 2018, Tennant et al., 2022 and Clark and Nolan, 2024 (T18, T22 and C24 respectively): - Water deprivation was used instead of food deprivation therefore 10% sucrose solution was used as reward instead of soy milk. The volume of sucrose solution varied between 5-10 uL per reward dispensed. - A speed of 3 cm/s was used as the stop threshold, compared to 0.7 cm/s and 4.7 cm/s used in T18 and T22. - Probe trials (non-beaconed trials without reward) were not recorded in this experiment. - Upon teleportation back to the start of the track, trial type was randomised with equal weighting to beaconed and non-beaconed trials, this produced an equal number of beaconed and non-beaconed trials compared to the repeated block structures used in T18 and T22. - Mice were only implanted once they reached an expert level in the task. - Electrophysiology was acquired using a National Instruments/IMEC acquisition system and recorded using Open Ephys software using the Neuropixel acquisition external plugin. - Behavioural variables were stored and saved directly from Blender3D, and time synced retrospectively using aperiodic TTL pulses sent directly to both the Neuropixel acquisition system and Blender3D via a custom Arduino Due.</p>
 </section>
 <section id="experiment-and-session-types" class="level2">
 <h2 class="anchored" data-anchor-id="experiment-and-session-types">Experiment and session Types</h2>
@@ -205,31 +212,47 @@ Visual multi-sequences
 <h3 class="anchored" data-anchor-id="raw-data">Raw data</h3>
 <p>The raw data is organised as follows:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>data_folder<span class="op">/</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    Cohort_folder<span class="op">/</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        session_folder<span class="op">/</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>            M{mouse}_D{day}_datetime_{session_abbreviation}<span class="op">/</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>where datetime is the time the session began.</p>
-<p>For example, the VR data for mouse 25, day 25 in stored in</p>
-<pre><code>"data_folder/Cohort12_august2024/vr/M25_D25_2024-11-13_13-59-48_VR1"</code></pre>
-<p>Within each folder is the raw data extracted during the experiment. Depending on the session, this might contain electrophysiology data, behavioural data or both. Find out more in the Datatypes section below.</p>
-</section>
-<section id="derived-data" class="level3">
-<h3 class="anchored" data-anchor-id="derived-data">Derived data</h3>
-<p>The derived data is organised as follows:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>derivatives_folder<span class="op">/</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    M{mouse}<span class="op">/</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        D{day}<span class="op">/</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>            full<span class="op">/</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>            {session_type_1}<span class="op">/</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>            {session_type_2}<span class="op">/</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>            ...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>So that each <code>experiment</code> is grouped togehter. The information in <code>full</code> is shared between all sessions in the experiment (e.g.&nbsp;if all the data is sorted together, the sorted data is stored here) while information unique to each session is stored in the <code>session_type_n</code> folder. This folder can contain <em>many</em> pieces of data. Each is described in the DataTypes section below.</p>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    session_folder<span class="op">/</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        M{mouse}_D{day}_datetime_{session_abbreviation}<span class="op">/</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>            Record Node <span class="dv">102</span><span class="op">/</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>                experiment1<span class="op">/</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>                    recording1<span class="op">/</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>                        continous<span class="op">/</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>```                     events<span class="op">/</span> (<span class="kw">not</span> used)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                        spikes<span class="op">/</span> (<span class="kw">not</span> used)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                        structure.oebin</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>            —VIDEOFILE <span class="op">-</span> This <span class="kw">is</span> a .avi <span class="bu">file</span> that either captures pupil <span class="kw">and</span> licks <span class="kw">or</span> Birds Eye view tracking. TTL pulses are visible <span class="kw">in</span> the video <span class="kw">and</span> are typically computed into bonsai output .csv files to quantify the <span class="bu">sum</span> of a bounding box around a LED <span class="cf">with</span> a signal consistent <span class="cf">with</span> the timing of the TTL pulses. TTL pulses can be recomputed <span class="im">from</span> video files <span class="cf">if</span> needed. </span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>            —BEHAVIOURFILE <span class="op">-</span> This <span class="kw">is</span> a .csv <span class="bu">file</span> either a blender output <span class="bu">file</span> (contains TTL pulse array per sample) <span class="kw">or</span> a bonsai output <span class="bu">file</span> containing position information (contains TTL pulses per sample)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>            —params.yaml <span class="op">-</span> This <span class="bu">file</span> contains specific information to the recording that needs to be given <span class="im">as</span> extra information to make sense of the recording, such <span class="im">as</span> the stopping threshold used <span class="kw">in</span> blender <span class="cf">for</span> VR.</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>where datetime <span class="kw">is</span> the time the session began.</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>For example, the VR data <span class="cf">for</span> mouse <span class="dv">25</span>, day <span class="dv">20</span> <span class="kw">in</span> stored <span class="kw">in</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>“data_folder/vr/M25_D20_2024-11-08_11-52-50_VR1”</p>
+<pre><code>
+Within each folder is the raw data extracted during the experiment. Depending on the session, this might contain electrophysiology data, behavioural data or both. Find out more in the Datatypes section below.
+
+
+
+### Derived data
+
+The derived data is organised as follows:
+
+``` python
+derivatives_folder/
+    M{mouse}/
+        D{day}/
+            full/
+            {session_type_1}/
+            {session_type_2}/
+            ...</code></pre>
+<p>So that each <code>experiment</code> is grouped together. The information in <code>full</code> is shared between all sessions in the experiment (e.g.&nbsp;if all the data is sorted together, the sorted data is stored here) while information unique to each session is stored in the <code>session_type_n</code> folder. This folder can contain <em>many</em> pieces of data. Each is described in the DataTypes section below.</p>
 <details>
 <summary>
 An example
 </summary>
-<p>On day 25, mouse 25 took part in the OF1-&gt;VR-&gt;OF2 experiment. Its derivatives folder looks like</p>
-<pre><code>M25/D25/
+<p>On day 20, mouse 25 took part in the OF1-&gt;VR-&gt;OF2 experiment. Its derivatives folder looks like</p>
+<pre><code>M25/D20/
     full/
         kilosort4/
             kilosort4_report/
@@ -268,9 +291,9 @@ An example
 <pre><code>data_folder/Cohort_folder/session_folder/M1_D1_datetime_{session}/</code></pre>
 <p>Openphys files. Roughly a large binary file with some metadata.</p>
 <p>These can be read using <code>spikeinterface</code> e.g.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> spikeinterface.full <span class="im">as</span> si</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>path_to_recording <span class="op">=</span> <span class="st">"Cohort12_august2024/of/M25_D25_2024-11-13_13-32-25_OF1/"</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>recording <span class="op">=</span> si.read_openephys(path_to_recording)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> spikeinterface.full <span class="im">as</span> si</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>path_to_recording <span class="op">=</span> <span class="st">"Cohort12_august2024/of/M25_D20_2024-11-08_11-25-37_OF1/"</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>recording <span class="op">=</span> si.read_openephys(path_to_recording)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="sortinganalyzer" class="level3">
 <h3 class="anchored" data-anchor-id="sortinganalyzer">SortingAnalyzer</h3>
@@ -278,9 +301,9 @@ An example
 <pre><code>derivatives_folder/M{mouse}/D{day}/full/{sorter_name}_{sorting_protocol}/{sorter_name}_{sorting_protocol}_sa/</code></pre>
 <p>A <code>spikeinterface</code> <code>SortingAnalyzer</code> object, containing spike times and dervied information such as unit templates, spike locations etc. The analyzer depends on the sorter used. We label each sorting protocol by a number. The details of the protocols can be found in the <a href="#protocols">Protocols</a> section.</p>
 <p>Can be read using <code>spikeinterface</code></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> spikeinterface.full <span class="im">as</span> si</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>sa_path <span class="op">=</span> <span class="st">"derivatives/M25/D25/full/kilosort4_3/kilosort4_3_sa"</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>sorting_analyzer <span class="op">=</span> si.read_sorting_analyzer(sa_path)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> spikeinterface.full <span class="im">as</span> si</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>sa_path <span class="op">=</span> <span class="st">"derivatives/M25/D20/full/kilosort4_3/kilosort4_3_sa"</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>sorting_analyzer <span class="op">=</span> si.read_sorting_analyzer(sa_path)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Read more about <code>SortingAnalyzer</code>s here: .</p>
 </section>
 <section id="spike-trains" class="level3">
@@ -289,10 +312,10 @@ An example
 <pre><code>derivatives_folder/M{mouse}/D{day}/session_folder/sorter_folder/spikes.pkl</code></pre>
 <p>A pickle file containing spike trains for each sorted unit, perhaps also with other information. When unpickled, the output is a pandas DataFrame. The unit ids of each unit are contained in the ‘cluster_id’ column and spike trains for each unit are contained in the <code>firing_times</code> column. The <code>cluster_id</code>s match those found in the <a href="#SortingAnalyzer">SortingAnalyzer</a>.</p>
 <p>Can be read using <code>pandas</code>.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>spike_data <span class="op">=</span> pd.read_pickle(<span class="st">"derivatives/M25/D25/of1/kilosort/spikes.pkl"</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>all_spike_trains <span class="op">=</span> spike_data[[<span class="st">'cluster_id'</span>, <span class="st">'firing_times]]</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="er">spike_train_for_unit_five = all_spike_trains</span>[<span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>spike_data <span class="op">=</span> pd.read_pickle(<span class="st">"derivatives/M25/D20/of1/kilosort/spikes.pkl"</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>all_spike_trains <span class="op">=</span> spike_data[[<span class="st">'cluster_id'</span>, <span class="st">'firing_times]]</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="er">spike_train_for_unit_five = all_spike_trains</span>[<span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="open-field-position-data-of1-of2" class="level3">
 <h3 class="anchored" data-anchor-id="open-field-position-data-of1-of2">Open Field Position Data (OF1 + OF2)</h3>
@@ -300,9 +323,9 @@ An example
 <pre><code>derivatives_folder/M{mouse}/D{day}/of{n}/position_data.csv</code></pre>
 <p>A csv file containing position and light pulse data (used for syncing). Position computed using deeplabcut. Important columns are: position_x, position_y and synced_time.</p>
 <p>Can be read using e.g.&nbsp;<code>pandas</code>.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>position_data <span class="op">=</span> pd.read_csv(<span class="st">"derivatives/M25/D25/of1/position_data.csv"</span>)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>position_x <span class="op">=</span> position_data[<span class="st">'position_x'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>position_data <span class="op">=</span> pd.read_csv(<span class="st">"derivatives/M25/D20/of1/position_data.csv"</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>position_x <span class="op">=</span> position_data[<span class="st">'position_x'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="channel-locations-in-ccf-coordinates" class="level3">
 <h3 class="anchored" data-anchor-id="channel-locations-in-ccf-coordinates">Channel locations in CCF coordinates</h3>
@@ -311,40 +334,56 @@ An example
 <p>A <code>.csv</code> file containing the locations of each <code>contact_id</code> of each probe in CCF coordinates. This can be used in conjunction with the raw recording or sorting analyzer to do lots of stuff.</p>
 <p>When thinking about clusters, we usually think in terms of <code>channel_ids</code> but their labelling is actually related to how the raw binary file is stored and don’t give any information about the electrode location. That information is stored in the <code>contact_id</code> property of the probe. This makes the code a little messy, since we need a map from <code>channel_ids</code> to <code>contact_ids</code> and another from <code>contact_ids</code> to <code>CCF_coords</code>.</p>
 <p>Here’s how to access this stuff from the raw recording</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> spikeinterface.full <span class="im">as</span> si</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>all_brain_locations <span class="op">=</span> pd.read_csv(<span class="st">".../all_ccf_coords_per_channel.csv"</span>)</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>this_mouse_brain_locations <span class="op">=</span> all_brain_locations.query(<span class="st">'mouse == 25'</span>)</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co"># make a dict of contact_ids -&gt; CCF brain coordinates</span></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>contact_ids_to_CCF <span class="op">=</span> { </span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    contact[<span class="st">'contact_id'</span>]: np.array([contact[<span class="st">'z_CCF'</span>], contact[<span class="st">'y_CCF'</span>], contact[<span class="st">'x_CCF'</span>]]) </span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _, contact <span class="kw">in</span> this_mouse_brain_locations.iterrows()</span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co"># now make a dict of channel ids -&gt; contact_ids</span></span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>recording <span class="op">=</span> si.read_openephys(<span class="st">".../M25_D25_2024-11-13_13-32-25_OF1/"</span>)</span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>contact_ids <span class="op">=</span> recording.get_probe().contact_ids</span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>channel_ids_to_contact_ids <span class="op">=</span> <span class="bu">dict</span>(<span class="bu">zip</span>(recording.channel_ids, contact_ids[recording.ids_to_indices()]))</span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="co"># you can then use these dicts to get the brain coordinate for a given channel id</span></span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>brain_coord_for_CH100 <span class="op">=</span> contact_ids_to_CCF[channel_ids_to_contact_ids[<span class="st">'CH100'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> spikeinterface.full <span class="im">as</span> si</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>all_brain_locations <span class="op">=</span> pd.read_csv(<span class="st">".../all_ccf_coords_per_channel.csv"</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>this_mouse_brain_locations <span class="op">=</span> all_brain_locations.query(<span class="st">'mouse == 25'</span>)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co"># make a dict of contact_ids -&gt; CCF brain coordinates</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>contact_ids_to_CCF <span class="op">=</span> { </span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    contact[<span class="st">'contact_id'</span>]: np.array([contact[<span class="st">'z_CCF'</span>], contact[<span class="st">'y_CCF'</span>], contact[<span class="st">'x_CCF'</span>]]) </span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _, contact <span class="kw">in</span> this_mouse_brain_locations.iterrows()</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="co"># now make a dict of channel ids -&gt; contact_ids</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>recording <span class="op">=</span> si.read_openephys(<span class="st">".../M25_D20_2024-11-08_11-25-37_OF1/"</span>)</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>contact_ids <span class="op">=</span> recording.get_probe().contact_ids</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>channel_ids_to_contact_ids <span class="op">=</span> <span class="bu">dict</span>(<span class="bu">zip</span>(recording.channel_ids, contact_ids[recording.ids_to_indices()]))</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="co"># you can then use these dicts to get the brain coordinate for a given channel id</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>brain_coord_for_CH100 <span class="op">=</span> contact_ids_to_CCF[channel_ids_to_contact_ids[<span class="st">'CH100'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Or you might want to use the CCF coordinates alongside a SortingAnalyzer, e.g.&nbsp;to find out where units are</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>sorting_analyzer <span class="op">=</span> si.load_sorting_analyzer(<span class="st">".../kilosort4_3_sa"</span>)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>contact_ids <span class="op">=</span> sorting_analyzer.get_probe().contact_ids</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># find the extremum channels, which is a dict from unit_id to channel_id</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>extremum_channels <span class="op">=</span> si.get_template_extremum_channel(sorting_analyzer)</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>brain_coord_for_unit_10 <span class="op">=</span> contact_ids_to_CCF[channel_ids_to_contact_ids[extremum_channels[<span class="dv">10</span>]]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>sorting_analyzer <span class="op">=</span> si.load_sorting_analyzer(<span class="st">".../kilosort4_3_sa"</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>contact_ids <span class="op">=</span> sorting_analyzer.get_probe().contact_ids</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># find the extremum channels, which is a dict from unit_id to channel_id</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>extremum_channels <span class="op">=</span> si.get_template_extremum_channel(sorting_analyzer)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>brain_coord_for_unit_10 <span class="op">=</span> contact_ids_to_CCF[channel_ids_to_contact_ids[extremum_channels[<span class="dv">10</span>]]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
 <section id="technical-details" class="level2">
 <h2 class="anchored" data-anchor-id="technical-details">Technical details</h2>
 <section id="protocols" class="level3">
 <h3 class="anchored" data-anchor-id="protocols">Protocols</h3>
+<p>add links to nolanlab wiki for surgery protocol for neuropixel implantation add links to nolanlab wiki for experimental protocol including behaviour, water dep etc add links to nolanlab wiki for extracting coordniates from DiI tracks using Probe-TRACK and custom scripts add links to nolanlab wiki for extracting features from video including licks, pupil dilation, steps and pose anything else?</p>
+</section>
+<section id="faq" class="level3">
+<h3 class="anchored" data-anchor-id="faq">FAQ</h3>
+<p>How was the experiment conducted on a typical day? Experimental days involved recording from mice in the open arena and then in the virtual location memory task and then once again in the open arena. Mice were collected from the holding room 30 - 60 minutes before recording, were handled for 5 - 10 minutes, weighed and placed for 10 - 20 minutes in a cage containing objects and a running wheel. Between recording sessions mice were placed back in the object-filled playground for 10 - 20 minutes. The open arena consisted of a metal box with a square floor area, removable metal walls, metal frame (Frame parts from Kanya UK, C01-1, C20-10, A33-12, B49-75, B48-75, A39-31, ALU3), and an A4-sized cue card in the middle of one of the metal walls. For the open field exploration session, mice were placed in the open arena while tethered via an ultrathin Neuropixel aquisition cable No Commutator was used. In a small number of sessions, tangling of the Neuropixel cable caused the cable to fall in front of the mouse. To stop mice from knawing on the cable, Mice were quickly untangled by the experimentor. For the location memory task water-restricted mice were trained to obtain rewards at a location on the virtual linear track. Mice were head-fixed using a RIVETS clamp (Ronal Tool Company, Inc) and ran on a cylindrical treadmill fitted with a rotary encoder (Pewatron). Virtual tracks, generated using Blender3D (blender.com) had length 200 cm, with a 60 cm track zone, a 20 cm reward zone, a second 60 cm track zone and a 60 cm black box to separate successive trials. The distance visible ahead of the mouse was 50 cm. The reward zone was either marked by distinct vertical green and black bars on beaconed trials, or was not marked by a visual cue at all on non-beaconed. A feeding tube placed in front of the animal dispensed 10 % sucrose water rewards (5 - 10 5l per reward) if the mouse stopped in the reward zone. A stop was registered in Blender3D if the speed of the mouse dropped below 3 cm/s. Speed was calculated on a rolling basis from the previous 100 ms at a rate of 60 Hz. Trials were delivered in a random fashion with a equal probability on any given trial of being beaconed or non-beaconed. Mice were trained to an expert level in the location memory task before being implanted with Neuropixel 2.0 probes and undergoing the three session (open arena/location memory task/open arena) For more details, see Clark and Nolan 2024, https://doi.org/10.7554/eLife.89356.2</p>
+<p>How was data collected? Electrophysiological signals were acquired using a Neuropixel 2.0 headstage connected via an Neuropixel aquisition cable attached to an IMEC-National Instruments aquisition system (recommended hardware as of July 2024). For the location memory task, positional and trial information was saved in Blender3D at 60 Hz and time sync with TTL pulses delivered concurrently to the Neuropixel aquisition system and the Blender3D computer via an arduino Due. In the open arena, motion and head-direction tracking used a camera (Logitech B525, 1280 x 720 pixels Webcam, RS components 795-0876) attached to the celing of the frame. A custom bonsai tracking script picked up the TTL pulses delivered to an LED in sight of the tracking camera and out of sight of the freely exploring mouse. Body and head direction tracking was completed post-recording using DeepLabCut.</p>
+<p>What was the surgery schedule of the experiment? Mice underwent two seperate surgeries under anaesthesia, the first being a headpost attachment surgery followed by a Neuropixel 2.0 implantation mounted on a Apollo drive resuable 3D printed body. All surgeries were performed by Harry Clark</p>
+<p>What drugs were used in the experiment? Isoflurane used during surgery. Vetergesic jelly given post surgery. Carprofen and Buprenorphine were given subcutaneously at the recommended dosage post surgery</p>
+<p>How can I reproduce the stereotaxic surgery? Add this</p>
+<p>Where can I find files for 3D printing the reusable 3D printed components? Add this Include rivets custom designs</p>
+<p>Where can I find the used NP2 probes for use in future experiments? There are currently 4 x NP2 4-shank probes ready to be used for implantation. These can be found within the 2nd floor wet lab room (add room number) in the drive building area. A box labelled with “Neuropixel 2.0 4 shank probes, Harry Clark” can be found on the shelf above the drive building bench in the drive staging area (marked by yellow tape). (This information was accurate as of 04/03/2025). These drives are super-glued to an Apollo drive shuttle and thus can only be used for further experimentation with Apollo drive compatible components.</p>
+<p>Still missing a vital piece of information? Email harrydclark91@gmail.com for further clarification so we can add the relevant information to this document.</p>
+</section>
+<section id="references" class="level3">
+<h3 class="anchored" data-anchor-id="references">References</h3>
+<p>Tennant et al., 2018; 10.1016/j.celrep.2018.01.005 Tennant et al., 2022; 10.1016/j.cub.2022.08.050 Clark and Nolan, 2024; 10.7554/eLife.89356.3</p>
 
 
 </section>
