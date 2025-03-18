@@ -216,7 +216,6 @@ derivatives_folder/M{mouse}/D{day}/of{n}/position_data.csv
 
 A csv file containing position and light pulse data (used for syncing). Position computed using deeplabcut. Important columns are: position_x, position_y and synced_time.
 
-
 Can be read using e.g. `pandas`.
 
 ``` python
@@ -224,6 +223,26 @@ import pandas as pd
 position_data = pd.read_csv("derivatives/M25/D20/of1/position_data.csv")
 position_x = position_data['position_x']
 ```
+
+### Tongue position
+
+Stored at 
+```
+derivatives_folder/M{mouse}/D{day}/vr/licks/
+```
+
+A csv file containing the position of the "tongue", extracted using deeplabcut. Our strategy was to teach deeplabcut to use the lip as the tip of the tongue when the mouth is closed. Then when the tongue comes out, use the tip of the tongue. Hence we expect the position data to be clustered into two rough clusters: near the lips when the mouth is closed and near the reward spout when the mouth is open. High velocity should correspond to licks.
+
+The rawest data from deeplabcut is stored in the file ending `200.csv` while a median filtered verison is stored in the file ending `200_filtered.csv`.
+
+Can be read using e.g. `pandas`. The dlc format has an abnormal header, meaning we need to pass some extra arguments to `read_csv`.
+
+``` python
+import pandas as pd
+tongue_data = pd.read_csv("derivatives/M25/D20/vr/M25_D20_si..._200.csv", header=[1, 2], index_col=0)
+tongue_position_x = position_data['x']
+```
+
 
 ### Channel locations in CCF coordinates
 
