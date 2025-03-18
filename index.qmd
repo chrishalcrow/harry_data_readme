@@ -17,6 +17,7 @@ TEST. This experiment is designed to find out stuff about memory.
 We stereotaxically targeted the medial entorhinal cortex of 7 males and 1 female C57BL/6J mice with Neuropixel 2.0 (NP2; 4 shank) probes. Prior to implantation of the NP2 probes, mice were trained in the VR linear track experiment to an expert level in both beaconed and non-beaconed trial variants (see Tennant et al., 2018; 10.1016/j.celrep.2018.01.005).
 
 Changes to the task from Tennant et al., 2018, Tennant et al., 2022 and Clark and Nolan, 2024 (T18, T22 and C24 respectively):
+
 - Water deprivation was used instead of food deprivation therefore 10% sucrose solution was used as reward instead of soy milk. The volume of sucrose solution varied between 5-10 uL per reward dispensed.
 - A speed of 3 cm/s was used as the stop threshold, compared to 0.7 cm/s and 4.7 cm/s used in T18 and T22. 
 - Probe trials (non-beaconed trials without reward) were not recorded in this experiment. 
