@@ -1,18 +1,18 @@
 ---
 title: Experiment summary
 output: html_document
-theme: spacelab
+theme: morph
 format:
   html:
     toc: true
     toc-location: left
 ---
 
-## Overview
+# Overview
 
 TEST. This experiment is designed to find out stuff about memory. 
 
-## Experimental overview
+# Experimental overview
 
 We stereotaxically targeted the medial entorhinal cortex of 7 males and 1 female C57BL/6J mice with Neuropixel 2.0 (NP2; 4 shank) probes. Prior to implantation of the NP2 probes, mice were trained in the VR linear track experiment to an expert level in both beaconed and non-beaconed trial variants (see Tennant et al., 2018; 10.1016/j.celrep.2018.01.005).
 
@@ -27,7 +27,7 @@ Changes to the task from Tennant et al., 2018, Tennant et al., 2022 and Clark an
 - Behavioural variables were stored and saved directly from Blender3D, and time synced retrospectively using aperiodic TTL pulses sent directly to both the Neuropixel acquisition system and Blender3D via a custom Arduino Due.
 
 
-## Experiment and session Types
+## Session Types
 
 Several different experiment types were considered. Each experiment contains sessions. Each session has an abbreviated label such as OF1. Knowing which label you are looking for will help when accessing the data.
 
@@ -62,6 +62,8 @@ Here, we summarise each experiment type and the sessions within each experiment.
 
 </details>
 
+# Data
+
 ## Folder Structure
 
 ### Raw data
@@ -93,8 +95,6 @@ For example, the VR data for mouse 25, day 20 in stored in
 ```
 
 Within each folder is the raw data extracted during the experiment. Depending on the session, this might contain electrophysiology data, behavioural data or both. Find out more in the Datatypes section below.
-
-
 
 ### Derived data
 
@@ -149,9 +149,7 @@ And more! Each of the folders contain more data and outputs. Importantly, the da
 
 </details>
 
-## Accessing data
-
-Here we summarise the most important data for collaborators to access.
+## Raw data access
 
 ### Raw Ephys recordings
 
@@ -169,6 +167,21 @@ import spikeinterface.full as si
 path_to_recording = "Cohort12_august2024/of/M25_D20_2024-11-08_11-25-37_OF1/"
 recording = si.read_openephys(path_to_recording)
 ```
+
+### Video files
+
+Stored at
+```
+data_folder/Cohort_folder/session_folder/M1_D1_datetime_{session}/{video_name}.avi
+```
+
+Avi files.
+
+**Open Field**. Video `M{mouse}_D{day}_OF1.avi` gives a top-down view of the open field arena. Used to determine mouse position.
+
+**VR**. Video `M{mouse}_D{day}_side_capture*.avi` gives side view of mouse while running. Used to determind Tongue position, pupil dilation and leg position (todo).
+
+## Derived data access
 
 ### SortingAnalyzer
 
@@ -205,8 +218,6 @@ spike_data = pd.read_pickle("derivatives/M25/D20/of1/kilosort/spikes.pkl")
 all_spike_trains = spike_data[['cluster_id', 'firing_times]]
 spike_train_for_unit_five = all_spike_trains[5]
 ```
-
-
 
 ### Open Field Position Data (OF1 + OF2)
 
