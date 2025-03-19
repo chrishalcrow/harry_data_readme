@@ -76,12 +76,13 @@ data_folder/
                 experiment1/
                     recording1/
                         continous/
-```                     events/ (not used)
+                        events/ (not used)
                         spikes/ (not used)
                         structure.oebin
             —VIDEOFILE - This is a .avi file that either captures pupil and licks or Birds Eye view tracking. TTL pulses are visible in the video and are typically computed into bonsai output .csv files to quantify the sum of a bounding box around a LED with a signal consistent with the timing of the TTL pulses. TTL pulses can be recomputed from video files if needed. 
             —BEHAVIOURFILE - This is a .csv file either a blender output file (contains TTL pulse array per sample) or a bonsai output file containing position information (contains TTL pulses per sample)
             —params.yaml - This file contains specific information to the recording that needs to be given as extra information to make sense of the recording, such as the stopping threshold used in blender for VR.
+```
 
 where datetime is the time the session began.
 
@@ -305,31 +306,39 @@ anything else?
 
 ### FAQ 
 
-How was the experiment conducted on a typical day?
+**How was the experiment conducted on a typical day?**
+
 Experimental days involved recording from mice in the open arena and then in the virtual location memory task and then once again in the open arena. Mice were collected from the holding room 30 - 60 minutes before recording, were handled for 5 - 10 minutes, weighed and placed for 10 - 20 minutes in a cage containing objects and a running wheel. Between recording sessions mice were placed back in the object-filled playground for 10 - 20 minutes. The open arena consisted of a metal box with a square floor area, removable metal walls, metal frame (Frame parts from Kanya UK, C01-1, C20-10, A33-12, B49-75, B48-75, A39-31, ALU3), and an A4-sized cue card in the middle of one of the metal walls. For the open field exploration session, mice were placed in the open arena while tethered via an ultrathin Neuropixel aquisition cable No Commutator was used. In a small number of sessions, tangling of the Neuropixel cable caused the cable to fall in front of the mouse. To stop mice from knawing on the cable, Mice were quickly untangled by the experimentor. For the location memory task water-restricted mice were trained to obtain rewards at a location on the virtual linear track. Mice were head-fixed using a RIVETS clamp (Ronal Tool Company, Inc) and ran on a cylindrical treadmill fitted with a rotary encoder (Pewatron). Virtual tracks, generated using Blender3D (blender.com) had length 200 cm, with a 60 cm track zone, a 20 cm reward zone, a second 60 cm track zone and a 60 cm black box to separate successive trials. The distance visible ahead of the mouse was 50 cm. The reward zone was either marked by distinct vertical green and black bars on beaconed trials, or was not marked by a visual cue at all on non-beaconed. A feeding tube placed in front of the animal dispensed 10 % sucrose water rewards (5 - 10 \xB5l per reward) if the mouse stopped in the reward zone. A stop was registered in Blender3D if the speed of the mouse dropped below 3 cm/s. Speed was calculated on a rolling basis from the previous 100 ms at a rate of 60 Hz. Trials were delivered in a random fashion with a equal probability on any given trial of being beaconed or non-beaconed. Mice were trained to an expert level in the location memory task before being implanted with Neuropixel 2.0 probes and undergoing the three session (open arena/location memory task/open arena) For more details, see Clark and Nolan 2024, https://doi.org/10.7554/eLife.89356.2
 
-How was data collected?
+**How was data collected?**
+
 Electrophysiological signals were acquired using a Neuropixel 2.0 headstage connected via an Neuropixel aquisition cable attached to an IMEC-National Instruments aquisition system (recommended hardware as of July 2024). For the location memory task, positional and trial information was saved in Blender3D at 60 Hz and time sync with TTL pulses delivered concurrently to the Neuropixel aquisition system and the Blender3D computer via an arduino Due. In the open arena, motion and head-direction tracking used a camera (Logitech B525, 1280 x 720 pixels Webcam, RS components 795-0876) attached to the celing of the frame. A custom bonsai tracking script picked up the TTL pulses delivered to an LED in sight of the tracking camera and out of sight of the freely exploring mouse. Body and head direction tracking was completed post-recording using DeepLabCut.    
 
-What was the surgery schedule of the experiment?
+**What was the surgery schedule of the experiment?**
+
 Mice underwent two seperate surgeries under anaesthesia, the first being a headpost attachment surgery followed by a Neuropixel 2.0 implantation mounted on a Apollo drive resuable 3D printed body. All surgeries were performed by Harry Clark
 
-What drugs were used in the experiment?
+**What drugs were used in the experiment?**
+
 Isoflurane used during surgery. Vetergesic jelly given post surgery. Carprofen and Buprenorphine were given subcutaneously at the recommended dosage post surgery
 
-How can I reproduce the stereotaxic surgery?
+**How can I reproduce the stereotaxic surgery?**
+
 Add this 
 
-Where can I find files for 3D printing the reusable 3D printed components?
+**Where can I find files for 3D printing the reusable 3D printed components?**
+
 Add this
 Include rivets custom designs
 
-Where can I find the used NP2 probes for use in future experiments?
+**Where can I find the used NP2 probes for use in future experiments?**
+
 There are currently 4 x NP2 4-shank probes ready to be used for implantation. These can be found within the 2nd floor wet lab room (add room number) in the drive building area. 
 A box labelled with “Neuropixel 2.0 4 shank probes, Harry Clark” can be found on the shelf above the drive building bench in the drive staging area (marked by yellow tape). 
 (This information was accurate as of 04/03/2025). These drives are super-glued to an Apollo drive shuttle and thus can only be used for further experimentation with Apollo drive compatible components.
 
-Still missing a vital piece of information? 
+**Still missing a vital piece of information?**
+
 Email harrydclark91@gmail.com for further clarification so we can add the relevant information to this document.
 
 ### References
