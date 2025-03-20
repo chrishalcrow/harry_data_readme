@@ -10,7 +10,7 @@ format:
 
 # Overview
 
-TEST. This experiment is designed to find out stuff about memory. 
+This experiment is designed to find out stuff about memory. 
 
 # Experimental overview
 
