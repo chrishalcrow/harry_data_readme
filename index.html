@@ -72,6 +72,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-811f389b8a180219181a0c464ee78b6b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -121,17 +124,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a>
   <ul class="collapse">
+  <li><a href="#data-and-pipeline-overview" id="toc-data-and-pipeline-overview" class="nav-link" data-scroll-target="#data-and-pipeline-overview">Data and pipeline overview</a></li>
   <li><a href="#folder-structure" id="toc-folder-structure" class="nav-link" data-scroll-target="#folder-structure">Folder Structure</a>
   <ul class="collapse">
   <li><a href="#raw-data" id="toc-raw-data" class="nav-link" data-scroll-target="#raw-data">Raw data</a></li>
   <li><a href="#derived-data" id="toc-derived-data" class="nav-link" data-scroll-target="#derived-data">Derived data</a></li>
   </ul></li>
-  <li><a href="#raw-data-access" id="toc-raw-data-access" class="nav-link" data-scroll-target="#raw-data-access">Raw data access</a>
+  <li><a href="#accessing-raw-data" id="toc-accessing-raw-data" class="nav-link" data-scroll-target="#accessing-raw-data">Accessing raw data</a>
   <ul class="collapse">
   <li><a href="#raw-ephys-recordings" id="toc-raw-ephys-recordings" class="nav-link" data-scroll-target="#raw-ephys-recordings">Raw Ephys recordings</a></li>
   <li><a href="#video-files" id="toc-video-files" class="nav-link" data-scroll-target="#video-files">Video files</a></li>
   </ul></li>
-  <li><a href="#derived-data-access" id="toc-derived-data-access" class="nav-link" data-scroll-target="#derived-data-access">Derived data access</a>
+  <li><a href="#accessing-derived-data" id="toc-accessing-derived-data" class="nav-link" data-scroll-target="#accessing-derived-data">Accessing derived data</a>
   <ul class="collapse">
   <li><a href="#sortinganalyzer" id="toc-sortinganalyzer" class="nav-link" data-scroll-target="#sortinganalyzer">SortingAnalyzer</a></li>
   <li><a href="#spike-trains" id="toc-spike-trains" class="nav-link" data-scroll-target="#spike-trains">Spike Trains</a></li>
@@ -141,7 +145,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#technical-details" id="toc-technical-details" class="nav-link" data-scroll-target="#technical-details">Technical details</a>
   <ul class="collapse">
-  <li><a href="#protocols" id="toc-protocols" class="nav-link" data-scroll-target="#protocols">Protocols</a></li>
+  <li><a href="#code-protocols" id="toc-code-protocols" class="nav-link" data-scroll-target="#code-protocols">Code Protocols</a></li>
+  <li><a href="#experimental-protocols" id="toc-experimental-protocols" class="nav-link" data-scroll-target="#experimental-protocols">Experimental Protocols</a></li>
   <li><a href="#faq" id="toc-faq" class="nav-link" data-scroll-target="#faq">FAQ</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul></li>
@@ -177,7 +182,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="overview" class="level1">
 <h1>Overview</h1>
-<p>TEST. This experiment is designed to find out stuff about memory.</p>
+<p>This experiment is designed to find out stuff about memory.</p>
 </section>
 <section id="experimental-overview" class="level1">
 <h1>Experimental overview</h1>
@@ -228,6 +233,18 @@ Visual multi-sequences
 </section>
 <section id="data" class="level1">
 <h1>Data</h1>
+<section id="data-and-pipeline-overview" class="level2">
+<h2 class="anchored" data-anchor-id="data-and-pipeline-overview">Data and pipeline overview</h2>
+<p>Our basic pipeline overview can be found below.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/pipelineoverview.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Pipeline overview"><img src="../images/pipelineoverview.png" class="img-fluid figure-img" alt="Pipeline overview"></a></p>
+<figcaption>Pipeline overview</figcaption>
+</figure>
+</div>
+<p>Every session contains an output from Bonsai or Blender and Video. These capture the animal behaviour data, as well as a light pulse signal used for synchronisation. Most sessions include ephys data, which capture neural behaviour. Metadata about the ephys recording is also saved, such as which recording configuration was used is also saved.</p>
+<p>We expect users will be most interested in <code>raw data</code> (in red) or the <code>outputs for analysis</code> (in teal). Find out how to access the <a href="#accessing-raw-data">Raw data</a> and <a href="#accessing-derived-data">Derived data</a> below. We explain how each script was implemented in the <a href="#code-protocols">Code Protocols</a> section.</p>
+</section>
 <section id="folder-structure" class="level2">
 <h2 class="anchored" data-anchor-id="folder-structure">Folder Structure</h2>
 <section id="raw-data" class="level3">
@@ -297,8 +314,9 @@ An example
 </details>
 </section>
 </section>
-<section id="raw-data-access" class="level2">
-<h2 class="anchored" data-anchor-id="raw-data-access">Raw data access</h2>
+<section id="accessing-raw-data" class="level2">
+<h2 class="anchored" data-anchor-id="accessing-raw-data">Accessing raw data</h2>
+<p>Here we summarise the most important data for collaborators to access.</p>
 <section id="raw-ephys-recordings" class="level3">
 <h3 class="anchored" data-anchor-id="raw-ephys-recordings">Raw Ephys recordings</h3>
 <p>Stored at</p>
@@ -318,8 +336,8 @@ An example
 <p><strong>VR</strong>. Video <code>M{mouse}_D{day}_side_capture*.avi</code> gives side view of mouse while running. Used to determind Tongue position, pupil dilation and leg position (todo).</p>
 </section>
 </section>
-<section id="derived-data-access" class="level2">
-<h2 class="anchored" data-anchor-id="derived-data-access">Derived data access</h2>
+<section id="accessing-derived-data" class="level2">
+<h2 class="anchored" data-anchor-id="accessing-derived-data">Accessing derived data</h2>
 <section id="sortinganalyzer" class="level3">
 <h3 class="anchored" data-anchor-id="sortinganalyzer">SortingAnalyzer</h3>
 <p>Stored at</p>
@@ -402,8 +420,12 @@ An example
 </section>
 <section id="technical-details" class="level2">
 <h2 class="anchored" data-anchor-id="technical-details">Technical details</h2>
-<section id="protocols" class="level3">
-<h3 class="anchored" data-anchor-id="protocols">Protocols</h3>
+<section id="code-protocols" class="level3">
+<h3 class="anchored" data-anchor-id="code-protocols">Code Protocols</h3>
+<p>Hello!</p>
+</section>
+<section id="experimental-protocols" class="level3">
+<h3 class="anchored" data-anchor-id="experimental-protocols">Experimental Protocols</h3>
 <p>add links to nolanlab wiki for surgery protocol for neuropixel implantation add links to nolanlab wiki for experimental protocol including behaviour, water dep etc add links to nolanlab wiki for extracting coordniates from DiI tracks using Probe-TRACK and custom scripts add links to nolanlab wiki for extracting features from video including licks, pupil dilation, steps and pose anything else?</p>
 </section>
 <section id="faq" class="level3">
@@ -853,6 +875,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 
