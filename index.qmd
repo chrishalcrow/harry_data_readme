@@ -62,7 +62,18 @@ Here, we summarise each experiment type and the sessions within each experiment.
 
 </details>
 
+
 # Data
+
+## Data and pipeline overview
+
+Our basic pipeline overview can be found below.
+
+![Pipeline overview](../images/pipelineoverview.png){.lightbox}
+
+Every session contains an output from Bonsai or Blender and Video. These capture the animal behaviour data, as well as a light pulse signal used for synchronisation. Most sessions include ephys data, which capture neural behaviour. Metadata about the ephys recording is also saved, such as which recording configuration was used is also saved.
+
+We expect users will be most interested in `raw data` (in red) or the `outputs for analysis` (in teal). Find out how to access the [Raw data](#accessing-raw-data) and [Derived data](#accessing-derived-data) below. We explain how each script was implemented in the [Code Protocols](#code-protocols) section.
 
 ## Folder Structure
 
@@ -149,7 +160,10 @@ And more! Each of the folders contain more data and outputs. Importantly, the da
 
 </details>
 
-## Raw data access
+
+## Accessing raw data
+
+Here we summarise the most important data for collaborators to access.
 
 ### Raw Ephys recordings
 
@@ -181,7 +195,7 @@ Avi files.
 
 **VR**. Video `M{mouse}_D{day}_side_capture*.avi` gives side view of mouse while running. Used to determind Tongue position, pupil dilation and leg position (todo).
 
-## Derived data access
+## Accessing derived data
 
 ### SortingAnalyzer
 
@@ -307,7 +321,11 @@ brain_coord_for_unit_10 = contact_ids_to_CCF[channel_ids_to_contact_ids[extremum
 
 ## Technical details
 
-### Protocols
+### Code Protocols
+
+Hello!
+
+### Experimental Protocols
 
 add links to nolanlab wiki for surgery protocol for neuropixel implantation
 add links to nolanlab wiki for experimental protocol including behaviour, water dep etc
