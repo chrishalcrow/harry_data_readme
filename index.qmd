@@ -337,6 +337,38 @@ add links to nolanlab wiki for extracting coordniates from DiI tracks using Prob
 add links to nolanlab wiki for extracting features from video including licks, pupil dilation, steps and pose
 anything else?
 
+## Feature Extraction from video data 
+
+How do we extract behavioural variables from video footage? Deeplabcut!
+We manually labelled the pixel location for features of interest from raw video data. 
+We then trained bespoke deeplabcut models to infer pixel positions for each video in the dataset. 
+
+Open field videos captured the mouse's movement in the square arena with a birds eye view.
+We estimated the mouse's pose using five features including head, shoulders, middle, tail start and tail end.
+Pixel coordinates coordinates were transformed and scaled to match the 1 m x 1 m dimensions of the open arena.
+To estimate head direction, we took the vector between the head and middle features and calculated an angle relative to north.
+
+Add image or gif?
+
+Virtual reality videos captured a side view of the mouse while head-restraint on a cylindrical treadmill.
+We estimated the mouse's pupil diameter using eight features including eye north, eye north-east, eye-east etc. 
+Pupil diamter was defined as the average pixel distance between opposite features such as north vs south, north-east vs south-west etc.
+Units for pupil diameter were arbitrarily defined as we were only concerned with relative changes.
+
+add image or gif of pupil models
+
+We estimated when the mouse's was engaged in licking using a single feature marking the position of the tongue.
+When the tongue was out of sight (in the mouse's mouth), we marked the tongue's position as the bottom of the mouth.
+Plotting the tongues position across a session typically produced a point cloud with two clearly defined clusters. 
+To label positions attributable to lick events, we first removed points below a 0.8 likelihood, we then scaled each position using sklearn `StandardScaler()` and manually drew around the lower positioned cluster. Finally we verified this method by plotting five frames from the manually drawn point clowd for each session.
+
+![Tongue position feature extraction](https://raw.githubusercontent.com/chrishalcrow/harry_data_readme/refs/heads/main/images/harry_data_readme/images/M20_D23_vr_dlc_tongue_points.png){.lightbox}
+![Drawing around lick point cloud](https://raw.githubusercontent.com/chrishalcrow/harry_data_readme/refs/heads/main/images/harry_data_readme/images/M20_D23_vr_dlc_tongue_points_classified.png){.lightbox}
+![Non lick frames](https://raw.githubusercontent.com/chrishalcrow/harry_data_readme/refs/heads/main/images/harry_data_readme/images/harry_data_readme/images/M20_D23_vr_frame_label_False.png){.lightbox}
+![Lick frames](https://raw.githubusercontent.com/chrishalcrow/harry_data_readme/refs/heads/main/images/harry_data_readme/images/harry_data_readme/images/M20_D23_vr_frame_label_False.png){.lightbox}
+
+add image or gif of lick models
+
 ## FAQ 
 
 **How was the experiment conducted on a typical day?**
