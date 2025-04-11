@@ -364,7 +364,7 @@ To label positions attributable to lick events, we manually drew around the lowe
 
 ![Tongue position feature extraction](https://raw.githubusercontent.com/chrishalcrow/harry_data_readme/refs/heads/main/images/M20_D23_vr_dlc_tongue_points.png){.lightbox}
 ![Drawing around lick point cloud](https://raw.githubusercontent.com/chrishalcrow/harry_data_readme/refs/heads/main/images/M20_D23_vr_dlc_tongue_points_classified.png){.lightbox}
-![Lick frames](https://raw.githubusercontent.com/chrishalcrow/harry_data_readme/refs/heads/main/images/M20_D23_vr_2.gif.png){.lightbox}
+![Lick frames](https://raw.githubusercontent.com/chrishalcrow/harry_data_readme/refs/heads/main/images/M20_D23_vr_2.gif){.lightbox}
 
 add image or gif of lick models
 
