@@ -1,12 +1,11 @@
 ---
 title: Experiment summary
 output: html_document
-theme: zephyr
+theme: cosmo
 format:
   html:
     toc: true
     toc-location: left
-    fontsize: 10
 ---
 
 # Overview
