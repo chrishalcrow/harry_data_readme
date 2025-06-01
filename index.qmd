@@ -75,7 +75,7 @@ where datetime is the time the session began.
 
 For example, the VR data for mouse 25, day 20 in stored in
 
-```
+``` python
 "data_folder/vr/M25_D20_2024-11-08_11-52-50_VR1"
 ```
 
@@ -102,7 +102,7 @@ The information in `full` is shared between all sessions in the experiment (e.g.
 ### Raw Ephys recordings
 
 Stored at
-```
+``` python
 data_folder/Cohort_folder/session_folder/M1_D1_datetime_{session}/
 ```
 
@@ -119,7 +119,7 @@ recording = si.read_openephys(path_to_recording)
 ### Video files
 
 Stored at
-```
+``` python
 data_folder/Cohort_folder/session_folder/M1_D1_datetime_{session}/{video_name}.avi
 ```
 
@@ -138,13 +138,13 @@ All of this data is synchronized.
 ### Spike data
 
 Stored at
-```
+``` python
 /ActiveProjects/Wolf/COHORT12/M{mouse}/D{day}/{session}/sub-{mouse}_day-{day}_ses-{session}_srt-{sorter_protocol}_clusters.npz
 ```
 
 Contains sorted (but non-curated) clusters. Most importantly each cluster contains a spike train, giving timepoints for each spike in that cluster in seconds. The file is an `npz` file which can be read using `numpy`. However, we recommend using `pyanpple` to open them. The following code snippets loads a file and bins its spike train:
 
-```
+``` python
 from pathlib import Path
 import pynapple as nap
 
@@ -167,7 +167,7 @@ We also store metadata. All the metadata can be accessed through `clusters.metad
 
 Quality metrics of each cluster, taken from the `SortingAnalyzer`, which can be used to curate:
 
-```
+``` python
 # Find all clusters with a firing rate greater than 10, then subselect using these
 high_firing_clusters = clusters[clusters['firing_rate'] > 10]
 
@@ -193,7 +193,7 @@ print(SCs.iloc[16])
 ### Behavioural Data
 
 Stored at
-```
+``` python
 /ActiveProjects/Wolf/COHORT12/M{mouse}/D{day}/{session}/sub-{mouse}_day-{day}_ses-{session}_srt-{sorter_protocol}_beh.nwb
 ```
 
@@ -241,7 +241,7 @@ We'll discuss the most important data that we save below:
 
 We use `pynapple` to combine behavioral and spiking data. For example, to compute the most basic positional turning curve in VR we can run
 
-```
+``` python
 beh = nap.load_file(beh_file)
 clusters = nap.load_file(clusters_file)
 
@@ -254,7 +254,7 @@ positional_tuning_curves = nap.compute_1d_tuning_curves(
 
 which we can plot...
 
-```
+``` python
 import matplotlib.pyplot as plt
 
 cluster_id = 4
@@ -286,7 +286,7 @@ positional_tuning_curves = nap.compute_1d_tuning_curves(
 ### SortingAnalyzer
 
 Stored at
-```
+``` python
 /ActiveProjects/Chris/Cohort12/derivatives
 ```
 
