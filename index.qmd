@@ -6,6 +6,7 @@ format:
   html:
     toc: true
     toc-location: left
+    fontsize: 10
 ---
 
 # Overview
@@ -263,7 +264,7 @@ fig, ax = plt.subplots()
 ax.plot(positional_tuning_curves[cluster_id])
 ax.set_xlabel("Position along track")
 ax.set_ylabel("Firing rate (Hz)")
-fig.savefig("positional_tuning_curve_cluster_{cluster_id}")
+fig.savefig("positional_tuning_curve_cluster_{cluster_id}.pdf")
 
 ```
 
