@@ -248,7 +248,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>            </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>where datetime is the time the session began.</p>
 <p>For example, the VR data for mouse 25, day 20 in stored in</p>
-<pre><code>"data_folder/vr/M25_D20_2024-11-08_11-52-50_VR1"</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">"data_folder/vr/M25_D20_2024-11-08_11-52-50_VR1"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Find out more about the data below.</p>
 </section>
 <section id="derived-data" class="level3">
@@ -269,7 +269,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="raw-ephys-recordings" class="level3">
 <h3 class="anchored" data-anchor-id="raw-ephys-recordings">Raw Ephys recordings</h3>
 <p>Stored at</p>
-<pre><code>data_folder/Cohort_folder/session_folder/M1_D1_datetime_{session}/</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>data_folder<span class="op">/</span>Cohort_folder<span class="op">/</span>session_folder<span class="op">/</span>M1_D1_datetime_{session}<span class="op">/</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Openphys files. Roughly a large binary file with some metadata.</p>
 <p>These can be read using <code>spikeinterface</code> e.g.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> spikeinterface.full <span class="im">as</span> si</span>
@@ -279,7 +279,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="video-files" class="level3">
 <h3 class="anchored" data-anchor-id="video-files">Video files</h3>
 <p>Stored at</p>
-<pre><code>data_folder/Cohort_folder/session_folder/M1_D1_datetime_{session}/{video_name}.avi</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>data_folder<span class="op">/</span>Cohort_folder<span class="op">/</span>session_folder<span class="op">/</span>M1_D1_datetime_{session}<span class="op">/</span>{video_name}.avi</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Videos are named using the BIDS structure, meaning they are of the form <code>sub-{mouse}_day-{day}_ses-{session}_video.avi</code>, e.g.&nbsp;<code>sub-20_day-25_ses-OF1_video.avi</code>.</p>
 <p><strong>Open Field</strong> gives a top-down view of the open field arena. Used to determine mouse position. Frame rate is 15 frames per second.</p>
 <p><strong>VR</strong> gives side view of mouse while running. Used to determine Tongue position and pupil dilation. Frame rate is 30 frames per second.</p>
@@ -292,31 +292,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="spike-data" class="level3">
 <h3 class="anchored" data-anchor-id="spike-data">Spike data</h3>
 <p>Stored at</p>
-<pre><code>/ActiveProjects/Wolf/COHORT12/M{mouse}/D{day}/{session}/sub-{mouse}_day-{day}_ses-{session}_srt-{sorter_protocol}_clusters.npz</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="op">/</span>ActiveProjects<span class="op">/</span>Wolf<span class="op">/</span>COHORT12<span class="op">/</span>M{mouse}<span class="op">/</span>D{day}<span class="op">/</span>{session}<span class="op">/</span>sub<span class="op">-</span>{mouse}_day<span class="op">-</span>{day}_ses<span class="op">-</span>{session}_srt<span class="op">-</span>{sorter_protocol}_clusters.npz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Contains sorted (but non-curated) clusters. Most importantly each cluster contains a spike train, giving timepoints for each spike in that cluster in seconds. The file is an <code>npz</code> file which can be read using <code>numpy</code>. However, we recommend using <code>pyanpple</code> to open them. The following code snippets loads a file and bins its spike train:</p>
-<pre><code>from pathlib import Path
-import pynapple as nap
-
-mouse = 25
-day = 25
-session = "OF1"
-srt = "kilosort4"
-
-path_to_active_project = Path("/Volumes/cmvm/sbms/groups/CDBS_SIDB_storage/NolanLab/ActiveProjects/")
-session_folder = path_to_active_project / f"Wolf/COHORT12/M{mouse}/D{day}/{session}/"
-clusters_file = session_folder / f"sub-{mouse}_day-{day}_ses-{session}_srt-{srt}_clusters.npz"
-
-clusters = nap.load_file(clusters_file)
-
-# print the time stamps of cluster 19
-print(clusters[19])</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pynapple <span class="im">as</span> nap</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>mouse <span class="op">=</span> <span class="dv">25</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>day <span class="op">=</span> <span class="dv">25</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>session <span class="op">=</span> <span class="st">"OF1"</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>srt <span class="op">=</span> <span class="st">"kilosort4"</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>path_to_active_project <span class="op">=</span> Path(<span class="st">"/Volumes/cmvm/sbms/groups/CDBS_SIDB_storage/NolanLab/ActiveProjects/"</span>)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>session_folder <span class="op">=</span> path_to_active_project <span class="op">/</span> <span class="ss">f"Wolf/COHORT12/M</span><span class="sc">{</span>mouse<span class="sc">}</span><span class="ss">/D</span><span class="sc">{</span>day<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>session<span class="sc">}</span><span class="ss">/"</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>clusters_file <span class="op">=</span> session_folder <span class="op">/</span> <span class="ss">f"sub-</span><span class="sc">{</span>mouse<span class="sc">}</span><span class="ss">_day-</span><span class="sc">{</span>day<span class="sc">}</span><span class="ss">_ses-</span><span class="sc">{</span>session<span class="sc">}</span><span class="ss">_srt-</span><span class="sc">{</span>srt<span class="sc">}</span><span class="ss">_clusters.npz"</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>clusters <span class="op">=</span> nap.load_file(clusters_file)</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co"># print the time stamps of cluster 19</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(clusters[<span class="dv">19</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>We also store metadata. All the metadata can be accessed through <code>clusters.metadata</code>. This includes:</p>
 <p>Quality metrics of each cluster, taken from the <code>SortingAnalyzer</code>, which can be used to curate:</p>
-<pre><code># Find all clusters with a firing rate greater than 10, then subselect using these
-high_firing_clusters = clusters[clusters['firing_rate'] &gt; 10]
-
-# Print how many clusters there are with a high firing rate
-print(len(high_firing_clusters))</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find all clusters with a firing rate greater than 10, then subselect using these</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>high_firing_clusters <span class="op">=</span> clusters[clusters[<span class="st">'firing_rate'</span>] <span class="op">&gt;</span> <span class="dv">10</span>]</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Print how many clusters there are with a high firing rate</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(high_firing_clusters))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Anatomical information for each cluster. This is the estimate position of the cluster in the brain. We can access the stereotaxic coordinds, common coordinate framework or the estimated brain region as follows:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print the brain region of cluster 6:</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>clusters[<span class="st">'brain_region'</span>][<span class="dv">6</span>]</span>
@@ -332,7 +332,7 @@ print(len(high_firing_clusters))</code></pre>
 <section id="behavioural-data" class="level3">
 <h3 class="anchored" data-anchor-id="behavioural-data">Behavioural Data</h3>
 <p>Stored at</p>
-<pre><code>/ActiveProjects/Wolf/COHORT12/M{mouse}/D{day}/{session}/sub-{mouse}_day-{day}_ses-{session}_srt-{sorter_protocol}_beh.nwb</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="op">/</span>ActiveProjects<span class="op">/</span>Wolf<span class="op">/</span>COHORT12<span class="op">/</span>M{mouse}<span class="op">/</span>D{day}<span class="op">/</span>{session}<span class="op">/</span>sub<span class="op">-</span>{mouse}_day<span class="op">-</span>{day}_ses<span class="op">-</span>{session}_srt<span class="op">-</span>{sorter_protocol}_beh.nwb</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>These are <code>NeurodataWithoutBorder</code> files. Can be read with the <code>pynwb</code> or <code>matnwb</code> packages, but we recommend using <code>pynapple</code>. The behavioural data stored depends on the session</p>
 <p>Regardless of session type, they are loaded the same way, and we can investigate what is saved in them as follow:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
@@ -374,25 +374,24 @@ print(len(high_firing_clusters))</code></pre>
 <section id="example-code" class="level4">
 <h4 class="anchored" data-anchor-id="example-code">Example code</h4>
 <p>We use <code>pynapple</code> to combine behavioral and spiking data. For example, to compute the most basic positional turning curve in VR we can run</p>
-<pre><code>beh = nap.load_file(beh_file)
-clusters = nap.load_file(clusters_file)
-
-positional_tuning_curves = nap.compute_1d_tuning_curves(
-    group=clusters,
-    feature=beh['P'],
-    nb_bins=50,
-)</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>beh <span class="op">=</span> nap.load_file(beh_file)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>clusters <span class="op">=</span> nap.load_file(clusters_file)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>positional_tuning_curves <span class="op">=</span> nap.compute_1d_tuning_curves(</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    group<span class="op">=</span>clusters,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    feature<span class="op">=</span>beh[<span class="st">'P'</span>],</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    nb_bins<span class="op">=</span><span class="dv">50</span>,</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>which we can plot…</p>
-<pre><code>import matplotlib.pyplot as plt
-
-cluster_id = 4
-
-fig, ax = plt.subplots()
-ax.plot(positional_tuning_curves[cluster_id])
-ax.set_xlabel("Position along track")
-ax.set_ylabel("Firing rate (Hz)")
-fig.savefig("positional_tuning_curve_cluster_{cluster_id}")
-</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>cluster_id <span class="op">=</span> <span class="dv">4</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>ax.plot(positional_tuning_curves[cluster_id])</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Position along track"</span>)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Firing rate (Hz)"</span>)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>fig.savefig(<span class="st">"positional_tuning_curve_cluster_</span><span class="sc">{cluster_id}</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The real power of <code>pynapple</code> is dealing with time sub-selection using the <code>epoch</code> concept (<a href="https://pynapple.org/user_guide/01_introduction_to_pynapple.html#">read more</a>).</p>
 <p>In the following code we compute a 1D tuning curve only when the mouse is moving and only during cued trails:</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>beaconed_trials <span class="op">=</span> beh[<span class="st">'trials'</span>][beh[<span class="st">'trials'</span>][<span class="st">'type'</span>] <span class="op">==</span> <span class="st">'b'</span>]</span>
@@ -409,7 +408,7 @@ fig.savefig("positional_tuning_curve_cluster_{cluster_id}")
 <section id="sortinganalyzer" class="level3">
 <h3 class="anchored" data-anchor-id="sortinganalyzer">SortingAnalyzer</h3>
 <p>Stored at</p>
-<pre><code>/ActiveProjects/Chris/Cohort12/derivatives</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="op">/</span>ActiveProjects<span class="op">/</span>Chris<span class="op">/</span>Cohort12<span class="op">/</span>derivatives</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>A <code>spikeinterface</code> <code>SortingAnalyzer</code> object, containing spike times and dervied information such as unit templates, spike locations etc. The analyzer depends on the sorter used. We label each sorting protocol by a number. The details of the protocols can be found in the <a href="#protocols">Protocols</a> section.</p>
 <p>Can be read using <code>spikeinterface</code></p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> spikeinterface.full <span class="im">as</span> si</span>
