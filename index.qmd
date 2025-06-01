@@ -48,9 +48,9 @@ Every session contains an output from Bonsai or Blender, and a Video. These capt
 
 We expect the most useful data to be the `outputs for analysis` (in teal), or the `raw data` (in red) or the . Find out how to access the [Raw data](#accessing-raw-data) and [Derived data](#accessing-derived-data) below. We explain how each script was implemented in the [Code Protocols](#code-protocols) section.
 
-## Folder Structure
+## Accessing raw data
 
-### Raw data
+### Folder structure
 
 The raw data is organised as follows:
 
@@ -80,24 +80,6 @@ For example, the VR data for mouse 25, day 20 in stored in
 ```
 
 Find out more about the data below.
-
-### Derived data
-
-Each mouse day (usually) corresponds to one "experiment", which might contain several "sessions". To reflect this, the derived data is organised as follows:
-
-``` python
-derivatives_folder/
-    M{mouse}/
-        D{day}/
-            full/
-            {session_type_1}/
-            {session_type_2}/
-            ...
-```
-
-The information in `full` is shared between all sessions in the experiment (e.g. if all the data is sorted together, the sorted data is stored here) while information unique to each session is stored in the `session_type_n` folder. This folder can contain *many* pieces of data. Each is described in the DataTypes section below.
-
-## Accessing raw data
 
 ### Raw Ephys recordings
 
@@ -129,11 +111,27 @@ Videos are named using the BIDS structure, meaning they are of the form `sub-{mo
 
 **VR** gives side view of mouse while running. Used to determine Tongue position and pupil dilation.  Frame rate is 30 frames per second.
 
-## Derived data
+## Accessing Derived data
 
-Most of the derived data is in `NOLANLABDATASTORE/ActiveProjects/Wolf/COHORT12/`. 
+Most of the derived data is in `NOLANLABDATASTORE/ActiveProjects/Wolf/COHORT12/`. The Sorting Analyzer are kept in `NOLANLABDATASTORE/ActiveProjects/Chris/Cohort12/derivatives`.
 
 All of this data is synchronized.
+
+### Folder structure
+
+Each mouse day (usually) corresponds to one "experiment", which might contain several "sessions". To reflect this, the derived data is organised as follows:
+
+``` python
+derivatives_folder/
+    M{mouse}/
+        D{day}/
+            full/
+            {session_type_1}/
+            {session_type_2}/
+            ...
+```
+
+The information in `full` is shared between all sessions in the experiment (e.g. if all the data is sorted together, the sorted data is stored here) while information unique to each session is stored in the `session_type_n` folder. This folder can contain *many* pieces of data. The data is described below.
 
 ### Spike data
 
