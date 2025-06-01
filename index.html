@@ -132,18 +132,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a>
   <ul class="collapse">
   <li><a href="#data-overview" id="toc-data-overview" class="nav-link" data-scroll-target="#data-overview">Data overview</a></li>
-  <li><a href="#folder-structure" id="toc-folder-structure" class="nav-link" data-scroll-target="#folder-structure">Folder Structure</a>
-  <ul class="collapse">
-  <li><a href="#raw-data" id="toc-raw-data" class="nav-link" data-scroll-target="#raw-data">Raw data</a></li>
-  <li><a href="#derived-data" id="toc-derived-data" class="nav-link" data-scroll-target="#derived-data">Derived data</a></li>
-  </ul></li>
   <li><a href="#accessing-raw-data" id="toc-accessing-raw-data" class="nav-link" data-scroll-target="#accessing-raw-data">Accessing raw data</a>
   <ul class="collapse">
+  <li><a href="#folder-structure" id="toc-folder-structure" class="nav-link" data-scroll-target="#folder-structure">Folder structure</a></li>
   <li><a href="#raw-ephys-recordings" id="toc-raw-ephys-recordings" class="nav-link" data-scroll-target="#raw-ephys-recordings">Raw Ephys recordings</a></li>
   <li><a href="#video-files" id="toc-video-files" class="nav-link" data-scroll-target="#video-files">Video files</a></li>
   </ul></li>
-  <li><a href="#derived-data-1" id="toc-derived-data-1" class="nav-link" data-scroll-target="#derived-data-1">Derived data</a>
+  <li><a href="#accessing-derived-data" id="toc-accessing-derived-data" class="nav-link" data-scroll-target="#accessing-derived-data">Accessing Derived data</a>
   <ul class="collapse">
+  <li><a href="#folder-structure-1" id="toc-folder-structure-1" class="nav-link" data-scroll-target="#folder-structure-1">Folder structure</a></li>
   <li><a href="#spike-data" id="toc-spike-data" class="nav-link" data-scroll-target="#spike-data">Spike data</a></li>
   <li><a href="#behavioural-data" id="toc-behavioural-data" class="nav-link" data-scroll-target="#behavioural-data">Behavioural Data</a></li>
   <li><a href="#sortinganalyzer" id="toc-sortinganalyzer" class="nav-link" data-scroll-target="#sortinganalyzer">SortingAnalyzer</a></li>
@@ -227,10 +224,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Every session contains an output from Bonsai or Blender, and a Video. These capture the animal behaviour data, as well as a light pulse signal used for synchronisation. Most sessions include ephys data, which capture neural behaviour.</p>
 <p>We expect the most useful data to be the <code>outputs for analysis</code> (in teal), or the <code>raw data</code> (in red) or the . Find out how to access the <a href="#accessing-raw-data">Raw data</a> and <a href="#accessing-derived-data">Derived data</a> below. We explain how each script was implemented in the <a href="#code-protocols">Code Protocols</a> section.</p>
 </section>
-<section id="folder-structure" class="level2">
-<h2 class="anchored" data-anchor-id="folder-structure">Folder Structure</h2>
-<section id="raw-data" class="level3">
-<h3 class="anchored" data-anchor-id="raw-data">Raw data</h3>
+<section id="accessing-raw-data" class="level2">
+<h2 class="anchored" data-anchor-id="accessing-raw-data">Accessing raw data</h2>
+<section id="folder-structure" class="level3">
+<h3 class="anchored" data-anchor-id="folder-structure">Folder structure</h3>
 <p>The raw data is organised as follows:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>data_folder<span class="op">/</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    session_folder<span class="op">/</span></span>
@@ -251,44 +248,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">"data_folder/vr/M25_D20_2024-11-08_11-52-50_VR1"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Find out more about the data below.</p>
 </section>
-<section id="derived-data" class="level3">
-<h3 class="anchored" data-anchor-id="derived-data">Derived data</h3>
-<p>Each mouse day (usually) corresponds to one “experiment”, which might contain several “sessions”. To reflect this, the derived data is organised as follows:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>derivatives_folder<span class="op">/</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    M{mouse}<span class="op">/</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        D{day}<span class="op">/</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>            full<span class="op">/</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>            {session_type_1}<span class="op">/</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>            {session_type_2}<span class="op">/</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>            ...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The information in <code>full</code> is shared between all sessions in the experiment (e.g.&nbsp;if all the data is sorted together, the sorted data is stored here) while information unique to each session is stored in the <code>session_type_n</code> folder. This folder can contain <em>many</em> pieces of data. Each is described in the DataTypes section below.</p>
-</section>
-</section>
-<section id="accessing-raw-data" class="level2">
-<h2 class="anchored" data-anchor-id="accessing-raw-data">Accessing raw data</h2>
 <section id="raw-ephys-recordings" class="level3">
 <h3 class="anchored" data-anchor-id="raw-ephys-recordings">Raw Ephys recordings</h3>
 <p>Stored at</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>data_folder<span class="op">/</span>Cohort_folder<span class="op">/</span>session_folder<span class="op">/</span>M1_D1_datetime_{session}<span class="op">/</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data_folder<span class="op">/</span>Cohort_folder<span class="op">/</span>session_folder<span class="op">/</span>M1_D1_datetime_{session}<span class="op">/</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Openphys files. Roughly a large binary file with some metadata.</p>
 <p>These can be read using <code>spikeinterface</code> e.g.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> spikeinterface.full <span class="im">as</span> si</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>path_to_recording <span class="op">=</span> <span class="st">"data_folder/of/M25_D20_2024-11-08_11-25-37_OF1/"</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>recording <span class="op">=</span> si.read_openephys(path_to_recording)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> spikeinterface.full <span class="im">as</span> si</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>path_to_recording <span class="op">=</span> <span class="st">"data_folder/of/M25_D20_2024-11-08_11-25-37_OF1/"</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>recording <span class="op">=</span> si.read_openephys(path_to_recording)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="video-files" class="level3">
 <h3 class="anchored" data-anchor-id="video-files">Video files</h3>
 <p>Stored at</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>data_folder<span class="op">/</span>Cohort_folder<span class="op">/</span>session_folder<span class="op">/</span>M1_D1_datetime_{session}<span class="op">/</span>{video_name}.avi</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data_folder<span class="op">/</span>Cohort_folder<span class="op">/</span>session_folder<span class="op">/</span>M1_D1_datetime_{session}<span class="op">/</span>{video_name}.avi</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Videos are named using the BIDS structure, meaning they are of the form <code>sub-{mouse}_day-{day}_ses-{session}_video.avi</code>, e.g.&nbsp;<code>sub-20_day-25_ses-OF1_video.avi</code>.</p>
 <p><strong>Open Field</strong> gives a top-down view of the open field arena. Used to determine mouse position. Frame rate is 15 frames per second.</p>
 <p><strong>VR</strong> gives side view of mouse while running. Used to determine Tongue position and pupil dilation. Frame rate is 30 frames per second.</p>
 </section>
 </section>
-<section id="derived-data-1" class="level2">
-<h2 class="anchored" data-anchor-id="derived-data-1">Derived data</h2>
-<p>Most of the derived data is in <code>NOLANLABDATASTORE/ActiveProjects/Wolf/COHORT12/</code>.</p>
+<section id="accessing-derived-data" class="level2">
+<h2 class="anchored" data-anchor-id="accessing-derived-data">Accessing Derived data</h2>
+<p>Most of the derived data is in <code>NOLANLABDATASTORE/ActiveProjects/Wolf/COHORT12/</code>. The Sorting Analyzer are kept in <code>NOLANLABDATASTORE/ActiveProjects/Chris/Cohort12/derivatives</code>.</p>
 <p>All of this data is synchronized.</p>
+<section id="folder-structure-1" class="level3">
+<h3 class="anchored" data-anchor-id="folder-structure-1">Folder structure</h3>
+<p>Each mouse day (usually) corresponds to one “experiment”, which might contain several “sessions”. To reflect this, the derived data is organised as follows:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>derivatives_folder<span class="op">/</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    M{mouse}<span class="op">/</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>        D{day}<span class="op">/</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>            full<span class="op">/</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>            {session_type_1}<span class="op">/</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>            {session_type_2}<span class="op">/</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>            ...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The information in <code>full</code> is shared between all sessions in the experiment (e.g.&nbsp;if all the data is sorted together, the sorted data is stored here) while information unique to each session is stored in the <code>session_type_n</code> folder. This folder can contain <em>many</em> pieces of data. The data is described below.</p>
+</section>
 <section id="spike-data" class="level3">
 <h3 class="anchored" data-anchor-id="spike-data">Spike data</h3>
 <p>Stored at</p>
