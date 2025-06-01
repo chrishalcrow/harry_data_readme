@@ -12,68 +12,41 @@ format:
 
 This experiment is designed to find out stuff about memory. 
 
-# Experimental overview
-
-We stereotaxically targeted the medial entorhinal cortex of 7 males and 1 female C57BL/6J mice with Neuropixel 2.0 (NP2; 4 shank) probes. Prior to implantation of the NP2 probes, mice were trained in the VR linear track experiment to an expert level in both beaconed and non-beaconed trial variants (see Tennant et al., 2018; 10.1016/j.celrep.2018.01.005).
-
-Changes to the task from Tennant et al., 2018, Tennant et al., 2022 and Clark and Nolan, 2024 (T18, T22 and C24 respectively):
-
-- Water deprivation was used instead of food deprivation therefore 10% sucrose solution was used as reward instead of soy milk. The volume of sucrose solution varied between 5-10 uL per reward dispensed.
-- A speed of 3 cm/s was used as the stop threshold, compared to 0.7 cm/s and 4.7 cm/s used in T18 and T22. 
-- Probe trials (non-beaconed trials without reward) were not recorded in this experiment. 
-- Upon teleportation back to the start of the track, trial type was randomised with equal weighting to beaconed and non-beaconed trials, this produced an equal number of beaconed and non-beaconed trials compared to the repeated block structures used in T18 and T22. 
-- Mice were only implanted once they reached an expert level in the task.
-- Electrophysiology was acquired using a National Instruments/IMEC acquisition system and recorded using Open Ephys software using the Neuropixel acquisition external plugin.
-- Behavioural variables were stored and saved directly from Blender3D, and time synced retrospectively using aperiodic TTL pulses sent directly to both the Neuropixel acquisition system and Blender3D via a custom Arduino Due.
-
-
 ## Session Types
 
-Several different experiment types were considered. Each experiment contains sessions. Each session has an abbreviated label such as OF1. Knowing which label you are looking for will help when accessing the data.
+Each day, each mouse participated in one or more sessions. E.g. in the most common day, a mouse partakes in an open field session, then a 
+virtual reality session, then a second open field session. Our data is organised around these sessions, so it is helpful to understand
+them to understand the data. The session types are
 
-Here, we summarise each experiment type and the sessions within each experiment.
+### OF1 and OF2
 
-<details>
-<summary>Open field -> VR -> Open field</summary>
+An open field session. The mouse is placed in a 1m by 1m arena.
 
-**OF1**. The mouse explores the open field arena for 20 minutes.
+### VR
 
-**VR**. The mouse is transferred to a head fixed VR enviroment doing a memory task. Description of memory task. 
+A virtual reality session. The mouse is head-fixed, on a wheel in a virtual reality system. The plain `VR` tag is used for the simplest of
+our VR tasks, described in ... .
 
-**OF2**. The mouse is returned to the open field arena for another 20 minutes of free exploration.
-</details>
+### VRMC
 
-<details>
-<summary>Open field -> VR multi context -> Open field</summary>
-</details>
+A virtual reality multi context session. The mouse is head-fixed, on a wheel in a virtual reality system. The reward zone, described above,
+is in one of two locations in each trail. The mouse is alerted of this change through the walls changing colour.
 
-<details>
-<summary>Visual Coding</summary>
+### IMSEQ
 
-</details>
-
-<details>
-<summary>Visual Sequences</summary>
-
-</details>
-
-<details>
-<summary>Visual multi-sequences</summary>
-
-</details>
-
+Image sequence stuff...
 
 # Data
 
-## Data and pipeline overview
+## Data overview
 
 Our basic pipeline overview can be found below.
 
 ![Pipeline overview](https://raw.githubusercontent.com/chrishalcrow/harry_data_readme/refs/heads/main/images/pipelineoverview.png){.lightbox}
 
-Every session contains an output from Bonsai or Blender and Video. These capture the animal behaviour data, as well as a light pulse signal used for synchronisation. Most sessions include ephys data, which capture neural behaviour. Metadata about the ephys recording is also saved, such as which recording configuration was used is also saved.
+Every session contains an output from Bonsai or Blender, and a Video. These capture the animal behaviour data, as well as a light pulse signal used for synchronisation. Most sessions include ephys data, which capture neural behaviour.
 
-We expect users will be most interested in `raw data` (in red) or the `outputs for analysis` (in teal). Find out how to access the [Raw data](#accessing-raw-data) and [Derived data](#accessing-derived-data) below. We explain how each script was implemented in the [Code Protocols](#code-protocols) section.
+We expect the most useful data to be the `outputs for analysis` (in teal), or the `raw data` (in red) or the . Find out how to access the [Raw data](#accessing-raw-data) and [Derived data](#accessing-derived-data) below. We explain how each script was implemented in the [Code Protocols](#code-protocols) section.
 
 ## Folder Structure
 
@@ -110,7 +83,7 @@ Find out more about the data below.
 
 ### Derived data
 
-Each mouse day (usually) corresponds to one "experiment", which might contain severl "sessions". To reflect this, the derived data is organised as follows:
+Each mouse day (usually) corresponds to one "experiment", which might contain several "sessions". To reflect this, the derived data is organised as follows:
 
 ``` python
 derivatives_folder/
@@ -124,50 +97,7 @@ derivatives_folder/
 
 The information in `full` is shared between all sessions in the experiment (e.g. if all the data is sorted together, the sorted data is stored here) while information unique to each session is stored in the `session_type_n` folder. This folder can contain *many* pieces of data. Each is described in the DataTypes section below.
 
-<details>
-<summary>An example</summary>
-On day 20, mouse 25 took part in the OF1->VR->OF2 experiment. Its derivatives folder looks like
-
-```
-M25/D20/
-    full/
-        kilosort4/
-            kilosort4_report/
-            kilosort4_sa/
-        rec_samples.json
-    of1/
-        dlc/
-        Figures/
-        kilosort4/
-            spikes.pkl
-        position_data.csv
-        theta_phase.pkl
-    vr/
-        Figures/
-        kilosort4/
-            spikes.pkl
-        licks/
-            lick_data.csv
-        pupil_dilation/
-            pupil_dilation.csv
-        position_data.csv
-        theta_phase.pkl
-    of2/ 
-        dlc/
-        Figures/
-        kilosort4/
-            spikes.pkl
-        position_data.csv
-        theta_phase.pkl
-```
-
-And more! Importantly, the data which depends on the sorting algorithm used are contained in a folder named for that algorithm. E.g. the spikes.pkl file contains the spike times generated by the kilosort4 algorithm so belong to this folder.
-
-</details>
-
 ## Accessing raw data
-
-Here we summarise the most important data for collaborators to access.
 
 ### Raw Ephys recordings
 
@@ -193,19 +123,171 @@ Stored at
 data_folder/Cohort_folder/session_folder/M1_D1_datetime_{session}/{video_name}.avi
 ```
 
-Avi files.
+Videos are named using the BIDS structure, meaning they are of the form `sub-{mouse}_day-{day}_ses-{session}_video.avi`, e.g. `sub-20_day-25_ses-OF1_video.avi`.
 
-**Open Field**. Video `M{mouse}_D{day}_OF1.avi` gives a top-down view of the open field arena. Used to determine mouse position. Frame rate is 15 frames per second.
+**Open Field** gives a top-down view of the open field arena. Used to determine mouse position. Frame rate is 15 frames per second.
 
-**VR**. Video `M{mouse}_D{day}_side_capture*.avi` gives side view of mouse while running. Used to determind Tongue position, pupil dilation and leg position.  Frame rate is 60(??) frames per second.
+**VR** gives side view of mouse while running. Used to determine Tongue position and pupil dilation.  Frame rate is 30 frames per second.
 
-## Accessing derived data
+## Derived data
+
+Most of the derived data is in `NOLANLABDATASTORE/ActiveProjects/Wolf/COHORT12/`. 
+
+All of this data is synchronized.
+
+### Spike data
+
+Stored at
+```
+/ActiveProjects/Wolf/COHORT12/M{mouse}/D{day}/{session}/sub-{mouse}_day-{day}_ses-{session}_srt-{sorter_protocol}_clusters.npz
+```
+
+Contains sorted (but non-curated) clusters. Most importantly each cluster contains a spike train, giving timepoints for each spike in that cluster in seconds. The file is an `npz` file which can be read using `numpy`. However, we recommend using `pyanpple` to open them. The following code snippets loads a file and bins its spike train:
+
+```
+from pathlib import Path
+import pynapple as nap
+
+mouse = 25
+day = 25
+session = "OF1"
+srt = "kilosort4"
+
+path_to_active_project = Path("/Volumes/cmvm/sbms/groups/CDBS_SIDB_storage/NolanLab/ActiveProjects/")
+session_folder = path_to_active_project / f"Wolf/COHORT12/M{mouse}/D{day}/{session}/"
+clusters_file = session_folder / f"sub-{mouse}_day-{day}_ses-{session}_srt-{srt}_clusters.npz"
+
+clusters = nap.load_file(clusters_file)
+
+# print the time stamps of cluster 19
+print(clusters[19])
+```
+
+We also store metadata. All the metadata can be accessed through `clusters.metadata`. This includes: 
+
+Quality metrics of each cluster, taken from the `SortingAnalyzer`, which can be used to curate:
+
+```
+# Find all clusters with a firing rate greater than 10, then subselect using these
+high_firing_clusters = clusters[clusters['firing_rate'] > 10]
+
+# Print how many clusters there are with a high firing rate
+print(len(high_firing_clusters))
+```
+
+Anatomical information for each cluster. This is the estimate position of the cluster in the brain. We can access the stereotaxic coordinds, common coordinate framework or the estimated brain region as follows:
+
+``` python
+# print the brain region of cluster 6:
+clusters['brain_region'][6]
+
+# print the CCF coords of cluster 12:
+CCFs = clusters[['coord_CCFs_z', 'coord_CCFs_y', 'coord_CCFs_x']]
+print(CCFs.iloc[12])
+
+# print the SC coords of cluster 16:
+SCs = clusters[['coord_SCs_x','coord_SCs_y','coord_SCs_z']]
+print(SCs.iloc[16])
+```
+
+### Behavioural Data
+
+Stored at
+```
+/ActiveProjects/Wolf/COHORT12/M{mouse}/D{day}/{session}/sub-{mouse}_day-{day}_ses-{session}_srt-{sorter_protocol}_beh.nwb
+```
+
+These are `NeurodataWithoutBorder` files. Can be read with the `pynwb` or `matnwb` packages, but we recommend using `pynapple`. The behavioural data stored depends on the session
+
+Regardless of session type, they are loaded the same way, and we can investigate what is saved in them as follow:
+
+``` python
+from pathlib import Path
+import pynapple as nap
+
+mouse = 25
+day = 25
+session = "OF1"
+
+path_to_active_project = Path("/Volumes/cmvm/sbms/groups/CDBS_SIDB_storage/NolanLab/ActiveProjects/")
+session_folder = path_to_active_project / f"Wolf/COHORT12/M{mouse}/D{day}/{session}/"
+beh_file = session_folder / f"sub-{mouse}_day-{day}_ses-{session}_beh.nwb"
+
+beh = nap.load_file(beh_file)
+
+# see what is saved
+print(beh)
+```
+
+We'll discuss the most important data that we save below:
+
+#### OF behavioural data
+
+- **P_x** and **P_y**. Time series of position in cartesian coordinates, in units of cm.
+- **S**. Time series of computed speed of mouse, in cm/s.
+- **moving**. Interval set of whether or not the mouse is moving, with threshold ?? (WOLF). 
+
+#### VR behavioural data
+
+- **P**. Time series of position along the VR track, in units of cm. 
+- **S**. Time series of computed speed along the VR track, in units of cm.
+- **moving**. Interval set of whether of not the mouse is moving.
+- **lick**. Time series of when the mouse licks.
+- **eye_dilation**. Time series of pupil dilation, in dimensionless units.
+- **trials**. Interval set of trails. Used to pick out individual trails.
+- **trial_type**. Time series of which trial type is active at any time point. Type 0 is uncued and type 1 is cued.
+
+#### Example code
+
+We use `pynapple` to combine behavioral and spiking data. For example, to compute the most basic positional turning curve in VR we can run
+
+```
+beh = nap.load_file(beh_file)
+clusters = nap.load_file(clusters_file)
+
+positional_tuning_curves = nap.compute_1d_tuning_curves(
+    group=clusters,
+    feature=beh['P'],
+    nb_bins=50,
+)
+```
+
+which we can plot...
+
+```
+import matplotlib.pyplot as plt
+
+cluster_id = 4
+
+fig, ax = plt.subplots()
+ax.plot(positional_tuning_curves[cluster_id])
+ax.set_xlabel("Position along track")
+ax.set_ylabel("Firing rate (Hz)")
+fig.savefig("positional_tuning_curve_cluster_{cluster_id}")
+
+```
+
+The real power of `pynapple` is dealing with time sub-selection using the `epoch` concept ([read more](https://pynapple.org/user_guide/01_introduction_to_pynapple.html#)). 
+
+In the following code we compute a 1D tuning curve only when the mouse is moving and only during cued trails:
+
+``` python
+beaconed_trials = beh['trials'][beh['trials']['type'] == 'b']
+moving_and_beaconed = beh['moving'].intersect(beaconed_trials)
+
+positional_tuning_curves = nap.compute_1d_tuning_curves(
+    group=clusters,
+    feature=beh['P'],
+    nb_bins=50,
+    ep=moving_and_beaconed,
+)
+```
 
 ### SortingAnalyzer
 
 Stored at
 ```
-derivatives_folder/M{mouse}/D{day}/full/{sorter_name}_{sorting_protocol}/{sorter_name}_{sorting_protocol}_sa/
+/ActiveProjects/Chris/Cohort12/derivatives
 ```
 
 A `spikeinterface` `SortingAnalyzer` object, containing spike times and dervied information such as unit templates, spike locations etc. The analyzer depends on the sorter used. We label each sorting protocol by a number. The details of the protocols can be found in the [Protocols](#protocols) section.
@@ -213,115 +295,13 @@ A `spikeinterface` `SortingAnalyzer` object, containing spike times and dervied 
 Can be read using `spikeinterface`
 ``` python
 import spikeinterface.full as si
-sa_path = "derivatives/M25/D20/full/kilosort4_3/kilosort4_3_sa"
+sa_path = "derivatives/M25/D20/full/kilosort4/kilosort4_sa"
 sorting_analyzer = si.read_sorting_analyzer(sa_path)
 ```
 
+Used for more intricate curation and for comparisons of different spike sorters. Our default sorting is the protocol `kilosort4`.
+
 Read more about `SortingAnalyzer`s [here](https://spikeinterface.readthedocs.io/en/stable/modules/postprocessing.html), [here](https://spikeinterface.readthedocs.io/en/stable/tutorials/core/plot_4_sorting_analyzer.html#sphx-glr-tutorials-core-plot-4-sorting-analyzer-py) and [here (video)](https://youtu.be/pHze_8s4Qak?feature=shared&t=3590).
-
-### Spike Trains
-
-Stored at
-```
-derivatives_folder/M{mouse}/D{day}/session_folder/sorter_folder/spikes.pkl
-```
-
-A pickle file containing spike trains for each sorted unit, perhaps also with other information. When unpickled, the output is a pandas DataFrame. The unit ids of each unit are contained in the 'cluster_id' column and spike trains for each unit are contained in the `firing_times` column. The `cluster_id`s match those found in the [SortingAnalyzer](#SortingAnalyzer).
-
-Can be read using `pandas`.
-
-``` python
-import pandas as pd
-spike_data = pd.read_pickle("derivatives/M25/D20/of1/kilosort/spikes.pkl")
-all_spike_trains = spike_data[['cluster_id', 'firing_times]]
-spike_train_for_unit_five = all_spike_trains[5]
-```
-
-### Open Field Position Data (OF1 + OF2)
-
-Stored at
-```
-derivatives_folder/M{mouse}/D{day}/of{n}/position_data.csv
-```
-
-A csv file containing position and light pulse data (used for syncing). Position computed using deeplabcut. Important columns are: position_x, position_y and synced_time.
-
-Can be read using e.g. `pandas`.
-
-``` python
-import pandas as pd
-position_data = pd.read_csv("derivatives/M25/D20/of1/position_data.csv")
-position_x = position_data['position_x']
-```
-
-### Tongue position
-
-Stored at 
-```
-derivatives_folder/M{mouse}/D{day}/vr/licks/
-```
-
-A csv file containing the position of the "tongue", extracted using deeplabcut. Our strategy was to teach deeplabcut to use the lip as the tip of the tongue when the mouth is closed. Then when the tongue comes out, use the tip of the tongue. Hence we expect the position data to be clustered into two rough clusters: near the lips when the mouth is closed and near the reward spout when the mouth is open. High velocity should correspond to licks.
-
-The rawest data from deeplabcut is stored in the file ending `200.csv` while a median filtered verison is stored in the file ending `200_filtered.csv`.
-
-Can be read using e.g. `pandas`. The dlc format has an abnormal header, meaning we need to pass some extra arguments to `read_csv`.
-
-``` python
-import pandas as pd
-tongue_data = pd.read_csv("derivatives/M25/D20/vr/M25_D20_si..._200.csv", header=[1, 2], index_col=0)
-tongue_position_x = position_data['x']
-```
-
-
-### Channel locations in CCF coordinates
-
-Stored at
-```
-derivatives_folder/labels/all_ccf_coords_per_channel.csv
-```
-
-A `.csv` file containing the locations of each `contact_id` of each probe in CCF coordinates. This can be used in conjunction with the raw recording or sorting analyzer to do lots of stuff.
-
-When thinking about clusters, we usually think in terms of `channel_ids` but their labelling is actually related to how the raw binary file is stored and don't give any information about the electrode location. That information is stored
-in the `contact_id` property of the probe. This makes the code a little messy, since we need a map from `channel_ids` to `contact_ids` and another from `contact_ids` to `CCF_coords`.
-
-Here's how to access this stuff from the raw recording
-
-``` python
-import spikeinterface.full as si
-
-import pandas as pd
-import numpy as np
-all_brain_locations = pd.read_csv(".../all_ccf_coords_per_channel.csv")
-this_mouse_brain_locations = all_brain_locations.query('mouse == 25')
-
-# make a dict of contact_ids -> CCF brain coordinates
-contact_ids_to_CCF = { 
-    contact['contact_id']: np.array([contact['z_CCF'], contact['y_CCF'], contact['x_CCF']]) 
-    for _, contact in this_mouse_brain_locations.iterrows()
-}
-
-# now make a dict of channel ids -> contact_ids
-recording = si.read_openephys(".../M25_D20_2024-11-08_11-25-37_OF1/")
-contact_ids = recording.get_probe().contact_ids
-channel_ids_to_contact_ids = dict(zip(recording.channel_ids, contact_ids[recording.ids_to_indices()]))
-
-# you can then use these dicts to get the brain coordinate for a given channel id
-brain_coord_for_CH100 = contact_ids_to_CCF[channel_ids_to_contact_ids['CH100']]
-```
-
-Or you might want to use the CCF coordinates alongside a SortingAnalyzer, e.g. to find out where units are
-
-``` python
-sorting_analyzer = si.load_sorting_analyzer(".../kilosort4_3_sa")
-contact_ids = sorting_analyzer.get_probe().contact_ids
-
-# find the extremum channels, which is a dict from unit_id to channel_id
-extremum_channels = si.get_template_extremum_channel(sorting_analyzer)
-
-brain_coord_for_unit_10 = contact_ids_to_CCF[channel_ids_to_contact_ids[extremum_channels[10]]]
-```
 
 # Technical details
 
@@ -367,6 +347,22 @@ To label positions attributable to lick events, we manually drew around the lowe
 ![Lick frames](https://raw.githubusercontent.com/chrishalcrow/harry_data_readme/refs/heads/main/images/M20_D23_vr_2.gif){.lightbox}
 
 add image or gif of lick models
+
+
+# Experimental details
+
+We stereotaxically targeted the medial entorhinal cortex of 7 males and 1 female C57BL/6J mice with Neuropixel 2.0 (NP2; 4 shank) probes. Prior to implantation of the NP2 probes, mice were trained in the VR linear track experiment to an expert level in both beaconed and non-beaconed trial variants (see Tennant et al., 2018; 10.1016/j.celrep.2018.01.005).
+
+Changes to the task from Tennant et al., 2018, Tennant et al., 2022 and Clark and Nolan, 2024 (T18, T22 and C24 respectively):
+
+- Water deprivation was used instead of food deprivation therefore 10% sucrose solution was used as reward instead of soy milk. The volume of sucrose solution varied between 5-10 uL per reward dispensed.
+- A speed of 3 cm/s was used as the stop threshold, compared to 0.7 cm/s and 4.7 cm/s used in T18 and T22. 
+- Probe trials (non-beaconed trials without reward) were not recorded in this experiment. 
+- Upon teleportation back to the start of the track, trial type was randomised with equal weighting to beaconed and non-beaconed trials, this produced an equal number of beaconed and non-beaconed trials compared to the repeated block structures used in T18 and T22. 
+- Mice were only implanted once they reached an expert level in the task.
+- Electrophysiology was acquired using a National Instruments/IMEC acquisition system and recorded using Open Ephys software using the Neuropixel acquisition external plugin.
+- Behavioural variables were stored and saved directly from Blender3D, and time synced retrospectively using aperiodic TTL pulses sent directly to both the Neuropixel acquisition system and Blender3D via a custom Arduino Due.
+
 
 ## FAQ 
 
